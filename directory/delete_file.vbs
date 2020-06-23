@@ -31,4 +31,3 @@ Function delete_file(ByVal fileName)
 
     Set objFso = Nothing
 End Function
-
