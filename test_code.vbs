@@ -14,22 +14,22 @@ item_files = get_items(thisPath + "VBS",0)
 
 Dim i ,str
 If IsEmpty(directories) = False Then
-	For i = 0 to UBound(directories)
-		str = str + directories(i) + vbCrLf
-	Next
-	WScript.Echo str
+    For i = 0 to UBound(directories)
+        str = str + directories(i) + vbCrLf
+    Next
+    WScript.Echo str
 End If
 
 str = ""
 Dim file
 For Each file in files
-	str = str + file + vbCrLf
+    str = str + file + vbCrLf
 Next
 WScript.Echo str
 
 str = ""
 For i = 0 to UBound(item_files)
-	str = str + item_files(i) + vbCrLf
+    str = str + item_files(i) + vbCrLf
 Next
 WScript.Echo str
 

@@ -1,15 +1,15 @@
 Function create_directory(ByVal directoryName)
-	'Create folders recursively.
-	'
+    'Create folders recursively.
+    '
     'Parameters
-	'----------
-	'directoryName : String
-	'	directory name to be create
-	'
+    '----------
+    'directoryName : String
+    '   directory name to be create
+    '
     'Return
-	'----------
-	'boolen
-	'	success(True) , failure(False)
+    '----------
+    'boolen
+    '   success(True) , failure(False)
     create_directory = False
 
     Dim objFso: Set objFso = CreateObject("Scripting.FileSystemObject")

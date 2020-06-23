@@ -22,14 +22,14 @@ Function excel_macro_ran_password(ByVal fileName, ByVal macroName, ByVal pass, B
     Dim excelApp :Set excelApp = CreateObject("Excel.Application")
     excelApp.Visible = True
     'open file
-	Dim excelWorkbook
-	const vbString = 8
-	If VarType(pass) = vbString And VarType(writeResPass) = vbString Then
+    Dim excelWorkbook
+    const vbString = 8
+    If VarType(pass) = vbString And VarType(writeResPass) = vbString Then
         Set excelWorkbook = excelApp.Workbooks.Open(fileName,,,,pass,writeResPass,True)
     ElseIf VarType(pass) = vbString Then
         Set excelWorkbook = excelApp.Workbooks.Open(fileName,,,,pass,,True)
     ElseIf VarType(writeResPass) = vbString Then
-	    Set excelWorkbook = excelApp.Workbooks.Open(fileName,,,,,writeResPass,True)
+        Set excelWorkbook = excelApp.Workbooks.Open(fileName,,,,,writeResPass,True)
     Else
         Set excelWorkbook = excelApp.Workbooks.Open(fileName)
     End If
@@ -49,10 +49,10 @@ Function excel_macro_ran_password(ByVal fileName, ByVal macroName, ByVal pass, B
         excelApp.Workbooks.Close
         excelApp.Quit
         WScript.Echo fileName + " of " + macroName + " was executed."
-		excel_macro_ran_password = True
-	End If
-	Set excelWorkbook = Nothing
-	Set excelApp = Nothing
+        excel_macro_ran_password = True
+    End If
+    Set excelWorkbook = Nothing
+    Set excelApp = Nothing
 End Function
 
 'test code
