@@ -7,6 +7,7 @@ Execute(CreateObject("Scripting.FileSystemObject").OpenTextFile("VBS\directory\d
 Execute(CreateObject("Scripting.FileSystemObject").OpenTextFile("VBS\directory\directory_copy.vbs").ReadAll())
 Execute(CreateObject("Scripting.FileSystemObject").OpenTextFile("VBS\directory\directory_move.vbs").ReadAll())
 Execute(CreateObject("Scripting.FileSystemObject").OpenTextFile("VBS\directory\file_copy.vbs").ReadAll())
+Execute(CreateObject("Scripting.FileSystemObject").OpenTextFile("VBS\directory\file_move.vbs").ReadAll())
 Execute(CreateObject("Scripting.FileSystemObject").OpenTextFile("VBS\directory\get_directories.vbs").ReadAll())
 Execute(CreateObject("Scripting.FileSystemObject").OpenTextFile("VBS\directory\get_files.vbs").ReadAll())
 Execute(CreateObject("Scripting.FileSystemObject").OpenTextFile("VBS\directory\get_items.vbs").ReadAll())

@@ -15,18 +15,19 @@ Function delete_directory(ByVal directoryName)
     Dim objFso: Set objFso = CreateObject("Scripting.FileSystemObject")
     On Error Resume Next
     
-    If objFso.FolderExists(directoryName) = True Then
-        'Delete directory(including read-only and subdirectory)
-        call objFso.DeleteFolder(directoryName, True)
+    'Delete directory(including read-only and subdirectory)
+    call objFso.DeleteFolder(directoryName, True)
 
-        If Err.Number <> 0 Then
+    If Err.Number <> 0 Then
+        'error message
+        If objFso.FolderExists(directoryName) = True Then
             WScript.Echo "The directory being edited exists."
         Else
-            WScript.Echo "completed, Deletion of " + directoryName
-            delete_directory = True
+            WScript.Echo "Not exist, " + directoryName
         End if
     Else
-        WScript.Echo "Not exist, " + directoryName
+        WScript.Echo "completed, Deletion of " + directoryName
+        delete_directory = True
     End If
 
     Set objFso = Nothing
