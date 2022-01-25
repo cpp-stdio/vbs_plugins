@@ -1,11 +1,11 @@
-Rem https://github.com/cpp-stdio/English.git からデータをクローンします。
+Rem https://github.com/cpp-stdio/vbs_plugins.git からデータをクローンします。
 
 @echo on
 
-Set FILE_NAME=English
-Set BRANCH=main
-Set GIT_HTTP_PROXY=github.com/cpp-stdio/English.git
-Set GIT_PASSWORD=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
+Set FILE_NAME=vbs_plugins
+Set BRANCH=master
+Set GIT_HTTP_PROXY=github.com/cpp-stdio/vbs_plugins.git
+Set GIT_PASSWORD=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
 
 cd %~dp0%
 cd ../../

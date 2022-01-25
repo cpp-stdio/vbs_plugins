@@ -5,7 +5,7 @@ Rem https://github.com/cpp-stdio/vbs_plugins.git からデータをコミットします。
 Set FILE_NAME=vbs_plugins
 Set BRANCH=master
 Set GIT_HTTP_PROXY=github.com/cpp-stdio/vbs_plugins.git
-Set GIT_PASSWORD=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
+Set GIT_PASSWORD=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
 
 cd %~dp0%
 call %~dp0%GetCurrentTime\Pattern1.bat
@@ -25,7 +25,7 @@ If Exist %FILE_NAME% (
     Rem git status
 
     git commit -m "!MESSAGE!"
-    git push origin main:main
+    git push origin %BRANCH%:%BRANCH%
 ) Else (
     echo %FILE_NAME%というフォルダがないため、コミットできませんでした
 )
