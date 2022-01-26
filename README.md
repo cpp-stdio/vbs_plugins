@@ -1,8 +1,8 @@
 ## VBS
-This program is a VBscript (VBS) module that allows you to run excel macros, touch directories, and many other things in just one line.
+This program is a VBscript (VBS) module it allows you to run excel macros, touch directories, and many other things in just one line.
 So you will dramatically increase the maintainability and readability of your program.
 
-One drawback of this program is that you have to name the repository "VBS". It only one rule.
+One drawback of this program is it you have to name the repository "VBS". It only one rule.
 
 
 
