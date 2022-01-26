@@ -3,7 +3,6 @@
 'If you want to run this program, copy it to a directory outside VBS and try again.
 
 Execute(CreateObject("Scripting.FileSystemObject").OpenTextFile("VBS\__init__.vbs").ReadAll())
-
 thisPath = left(wscript.scriptfullname, len(wscript.scriptfullname) - len(wscript.scriptname))
 
 If True = False Then
