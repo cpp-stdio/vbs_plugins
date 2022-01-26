@@ -10,6 +10,7 @@ One drawback of this program is it you have to name the repository "VBS". It onl
 Add a this submodule with git.
 
 ## Usage
+To get started, take a look at the test code.  
 The first two lines you might wonder about are.
 ```vbscript
 ' get own path
