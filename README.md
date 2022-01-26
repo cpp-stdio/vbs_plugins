@@ -1,5 +1,5 @@
 ## VBS
-This program is a VBscript (VBS) module it allows you to run excel macros, touch directories, and many other things in just one line.
+This program is a VBscript (VBS) module it allows you to run excel macros, touch directories, and many other things in just one line.  
 So you will dramatically increase the maintainability and readability of your program.
 
 One drawback of this program is it you have to name the repository "VBS". It only one rule.
@@ -10,7 +10,7 @@ One drawback of this program is it you have to name the repository "VBS". It onl
 Add a this submodule with git.
 
 ## Usage
-To get started, take a look at the test code.  
+To get started, take a look at the "test_code.vbs".  
 The first two lines you might wonder about are.
 ```vbscript
 ' get own path
@@ -18,4 +18,5 @@ thisPath = left(wscript.scriptfullname, len(wscript.scriptfullname) - len(wscrip
 ' Include external modules.
 Execute(CreateObject("Scripting.FileSystemObject").OpenTextFile(thisPath + "VBS\__init__.vbs").ReadAll())
 ```
-This program is like an "include" in other languages.
+This program is like an "include" in other languages.  
+The other programs are examples of use.
