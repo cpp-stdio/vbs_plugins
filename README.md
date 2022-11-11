@@ -1,22 +1,14 @@
 ## VBS
-This program is a VBscript (VBS) module it allows you to run excel macros, touch directories, and many other things in just one line.  
-So you will dramatically increase the maintainability and readability of your program.
-
-One drawback of this program is it you have to name the repository "VBS". It only one rule.
-
-
+私自身が職場やプライベートで水平展開しても問題なしと判断したプログラムをまとめています。
+エクセルマクロの実行やディレクトリのタッチ、その他多くのことをたった1行で行うことができます
 
 ## Installation
-Add a this submodule with git.
+サブモジュールをgitで追加するも良し、ダウンロードして利用するの良し
 
 ## Usage
-To get started, take a look at the "test_code.vbs".  
-The first two lines you might wonder about are.
+利用する場合はリポジトリに "VBS "という名前を付けなければ利用できません
+本来のVBSにC++のようなインクルードという仕組みはありません。しかし抜け道がありファイルの階層を理解していれば実は可能です
 ```vbscript
-' get own path
 thisPath = left(wscript.scriptfullname, len(wscript.scriptfullname) - len(wscript.scriptname))
-' Include external modules.
 Execute(CreateObject("Scripting.FileSystemObject").OpenTextFile(thisPath + "VBS\__init__.vbs").ReadAll())
 ```
-This program is like an "include" in other languages.  
-The other programs are examples of use.
