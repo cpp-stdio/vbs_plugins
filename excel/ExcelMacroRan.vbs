@@ -15,6 +15,8 @@ Function excel_macro_ran(ByVal fileName, ByVal macroName)
     excel_macro_ran = False
 
     'start up excel application
+
+	excel_macro_ran = False
     Dim excelApp :Set excelApp = CreateObject("Excel.Application")
     excelApp.Visible = True
     'open file

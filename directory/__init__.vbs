@@ -11,6 +11,7 @@ Execute(CreateObject("Scripting.FileSystemObject").OpenTextFile("VBS\directory\f
 Execute(CreateObject("Scripting.FileSystemObject").OpenTextFile("VBS\directory\get_directories.vbs").ReadAll())
 Execute(CreateObject("Scripting.FileSystemObject").OpenTextFile("VBS\directory\get_files.vbs").ReadAll())
 Execute(CreateObject("Scripting.FileSystemObject").OpenTextFile("VBS\directory\get_items.vbs").ReadAll())
+Execute(CreateObject("Scripting.FileSystemObject").OpenTextFile("VBS\directory\up_folder.vbs").ReadAll())
 
 'private
 Execute(CreateObject("Scripting.FileSystemObject").OpenTextFile("VBS\directory\private\__init__.vbs").ReadAll())
