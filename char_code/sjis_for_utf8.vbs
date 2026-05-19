@@ -1,6 +1,6 @@
 Function sjis_for_utf8(fileName, beforeLineSeparator, afterLineSeparator)
     'This program change character code
-    ' SJIS(SHIFT-JIS) ?øΩ?øΩ UTF-8
+    ' SJIS(SHIFT-JIS) Å® UTF-8
     '
     'Parameters
     '----------
