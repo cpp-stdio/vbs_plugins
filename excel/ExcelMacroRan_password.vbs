@@ -1,27 +1,33 @@
 Function excel_macro_ran_password(ByVal fileName, ByVal macroName, ByVal pass, ByVal writeResPass)
-    'Running excel VBA
+    ' Executes a VBA macro in the specified password-protected Excel file.
+    ' パスワード付き Excel ファイル内の VBA マクロを実行する。
     '
-    'Parameters
-    '----------
-    'fileName : String
-    '   Excel file name
-    'macroName : String
-    '   will run function name or sub name the macro
-    'pass : String
-    '   Password needed to open excel. If it is empty, insert "Nothing".
-    'writeResPass : String
-    '   Password needed to read excel. If it is empty, insert "Nothing".
+    ' Parameters / パラメータ
+    ' ----------
+    ' fileName : String
+    '   Path of the Excel file to open.
+    '   開く Excel ファイルのパス。
+    ' macroName : String
+    '   Name of the VBA macro (function or subroutine) to execute.
+    '   実行する VBA マクロ名（Function または Sub の名前）。
+    ' pass : String
+    '   Password required to open the Excel file. Pass Nothing if no password is set.
+    '   Excel ファイルを開くためのパスワード。パスワードがない場合は Nothing を渡す。
+    ' writeResPass : String
+    '   Password required to edit the Excel file. Pass Nothing if no password is set.
+    '   Excel ファイルを編集するためのパスワード。パスワードがない場合は Nothing を渡す。
     '
-    'Return
-    '----------
-    'boolen
-    '   success(True) , failure(False)
+    ' Return / 戻り値
+    ' ----------
+    ' Boolean
+    '   True if the macro executed successfully, False if an error occurred.
+    '   マクロが正常に実行された場合は True、エラーが発生した場合は False。
     excel_macro_ran_password = False
 
-    'start up excel application
+    'Launch the Excel application
     Dim excelApp :Set excelApp = CreateObject("Excel.Application")
     excelApp.Visible = True
-    'open file
+    'Open the target Excel file
     Dim excelWorkbook
     const vbString = 8
     If VarType(pass) = vbString And VarType(writeResPass) = vbString Then
@@ -35,20 +41,20 @@ Function excel_macro_ran_password(ByVal fileName, ByVal macroName, ByVal pass, B
     End If
     
     On Error Resume Next
-    'start VBA
-    WScript.Echo "Ran " + macroName
+    'Execute the specified macro
+    WScript.Echo "Executing macro: " + macroName
     Call excelApp.Run(macroName)
 
     If Err.Number <> 0 Then
-        'We will leave the Excel without closing for the review of VBA.
-        WScript.Echo "Error : " + macroName
+        'Leave Excel open so the error can be inspected
+        WScript.Echo "Macro failed: " + macroName
     Else
-        'Exit the Excel application.
+        'Save the file, close it, and quit Excel
         Call excelWorkbook.Save()
         Call excelWorkbook.Close(False)
         excelApp.Workbooks.Close
         excelApp.Quit
-        WScript.Echo fileName + " of " + macroName + " was executed."
+        WScript.Echo "Macro executed: " + macroName + " in " + fileName
         excel_macro_ran_password = True
     End If
     Set excelWorkbook = Nothing

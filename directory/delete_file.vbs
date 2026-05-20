@@ -1,32 +1,35 @@
 Function delete_file(ByVal fileName)
-    'Delete fileName
+    ' Deletes the specified file.
+    ' 指定したファイルを削除する。
     '
-    'Parameters
-    '----------
-    'directoryName : String
-    '   file name to be delete
+    ' Parameters / パラメータ
+    ' ----------
+    ' fileName : String
+    '   Path of the file to delete.
+    '   削除するファイルのパス。
     '
-    'Return
-    '----------
-    'boolen
-    '   success(True) , failure(False)
+    ' Return / 戻り値
+    ' ----------
+    ' Boolean
+    '   True if successful, False if an error occurred.
+    '   成功した場合は True、エラーが発生した場合は False。
     delete_file = False
 
     Dim objFso: Set objFso = CreateObject("Scripting.FileSystemObject")
     On Error Resume Next
     
     If objFso.FileExists(fileName) = True Then
-        'Delete directory(including read-only and subdirectory)
-        call objFso.DeleteFile(fileName, True)
+        'Delete the file (forced, regardless of read-only attribute)
+        Call objFso.DeleteFile(fileName, True)
 
         If Err.Number <> 0 Then
-            WScript.Echo "The file being edited exists."
+            WScript.Echo "Cannot delete: the file may be in use or locked."
         Else
-            WScript.Echo "completed, Deletion of " + fileName
+            WScript.Echo "File deleted: " + fileName
             delete_file = True
         End if
     Else
-        WScript.Echo "Not exist, " + fileName
+        WScript.Echo "File not found: " + fileName
     End If
 
     Set objFso = Nothing

@@ -1,19 +1,22 @@
 Function up_folder(ByVal folderName)
-    ' Get one upper folder
+    ' Returns the path of the parent folder of the specified path.
+    ' 指定したパスの 1 つ上の（親）フォルダパスを返す。
     '
-    'Parameters
-    '----------
+    ' Parameters / パラメータ
+    ' ----------
     ' folderName : String
-    '    this is folder name
+    '   The path to get the parent folder of.
+    '   親フォルダを取得したいパス。
     '
-    'Return
-    '----------
-    'String
-    '   one upper folder name
+    ' Return / 戻り値
+    ' ----------
+    ' String
+    '   Full path of the parent folder.
+    '   親フォルダのフルパス。
 
     Dim objFSO: Set objFSO = WScript.CreateObject("Scripting.FileSystemObject")
     up_folder = objFso.GetParentFolderName(folderName)
-    WScript.Echo "one upper folder / " + up_folder
+    WScript.Echo "Parent folder: " + up_folder
     Set objFso = Nothing
 End Function
 

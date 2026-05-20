@@ -1,16 +1,24 @@
 Sub directory_contents_copy(ByVal beforeDirectoryName,ByVal afterDirectoryName,ByVal deeper)
-    'It copy directory contents
+    ' Copies the contents of a directory to another directory.
+    ' ディレクトリの中身を別のディレクトリにコピーする。
     '
-    'Parameters
-    '----------
-    'beforeDirectoryName : String
-    '   directory path before copy 
-    'afterDirectoryName : String
-    '   directory path after copy
-    'deeper : int
-    '   [Negative number] It copy all directory contents
-    '   [       0       ] It copy a directory contents
-    '   [positive number] It copies directory contents deep hierarchy for the according to number
+    ' Parameters / パラメータ
+    ' ----------
+    ' beforeDirectoryName : String
+    '   Source directory path.
+    '   コピー元ディレクトリのパス。
+    ' afterDirectoryName : String
+    '   Destination directory path.
+    '   コピー先ディレクトリのパス。
+    ' deeper : Integer
+    '   Controls how many levels of subdirectories to include.
+    '   何階層まで処理するかを指定する。
+    '   [Negative number] : Copies all subdirectories recursively.
+    '                       すべてのサブディレクトリを再帰的にコピーする。
+    '   [       0       ] : Copies only the direct contents (no subdirectories).
+    '                       指定ディレクトリ直下の中身のみコピーする（サブディレクトリは含まない）。
+    '   [Positive number] : Copies subdirectories up to the specified depth.
+    '                       指定した階層数の深さまでコピーする。
 
     If beforeDirectoryName = afterDirectoryName Then Exit Sub
     Dim objFSO: Set objFSO = WScript.CreateObject("Scripting.FileSystemObject")
@@ -25,21 +33,21 @@ Sub directory_contents_copy(ByVal beforeDirectoryName,ByVal afterDirectoryName,B
 
     On Error Resume Next
     If objFso.FolderExists(beforeDirectoryName) <> True Then
-        WScript.Echo "Not exist, " + beforeDirectoryName
+        WScript.Echo "Source directory not found: " + beforeDirectoryName
         Set objFSO = Nothing
         Exit Sub
     End If
 
     If objFSO.FolderExists(afterDirectoryName) <> True Then
-        call creater(afterDirectoryName, objFso)
+        Call creater(afterDirectoryName, objFso)
     End If
 
     Call deep_copy(beforeDirectoryName, afterDirectoryName, deeper, objFSO)
 
     If Err.Number = 0 Then
-        WScript.Echo "Copied to " + afterDirectoryName
+        WScript.Echo "Copied to: " + afterDirectoryName
     Else
-        WScript.Echo "Error " + Err.Description
+        WScript.Echo "Error: " + Err.Description
     End if
 
     Set objFSO = Nothing

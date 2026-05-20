@@ -1,4 +1,7 @@
-'public
+' Loads all directory operation functions.
+' ディレクトリ操作に関するすべての関数を読み込む。
+
+' --- Public / 公開関数 ---
 Execute(CreateObject("Scripting.FileSystemObject").OpenTextFile("VBS\directory\create_directory.vbs").ReadAll())
 Execute(CreateObject("Scripting.FileSystemObject").OpenTextFile("VBS\directory\delete_directory.vbs").ReadAll())
 Execute(CreateObject("Scripting.FileSystemObject").OpenTextFile("VBS\directory\delete_file.vbs").ReadAll())
@@ -13,5 +16,5 @@ Execute(CreateObject("Scripting.FileSystemObject").OpenTextFile("VBS\directory\g
 Execute(CreateObject("Scripting.FileSystemObject").OpenTextFile("VBS\directory\get_items.vbs").ReadAll())
 Execute(CreateObject("Scripting.FileSystemObject").OpenTextFile("VBS\directory\up_folder.vbs").ReadAll())
 
-'private
+' --- Private / 内部実装 ---
 Execute(CreateObject("Scripting.FileSystemObject").OpenTextFile("VBS\directory\private\__init__.vbs").ReadAll())

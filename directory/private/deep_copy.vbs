@@ -1,5 +1,4 @@
 Function deep_copy(ByVal before, ByVal after, ByVal deeper, ByRef fso)
-    
     If fso.FolderExists(after) <> True Then
         fso.CreateFolder(after)
     End If

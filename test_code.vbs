@@ -1,38 +1,115 @@
-'When running this program, set the directory name to "VBS".
+Dim fso, shell, scriptDir, vbsDir, parentDir, initPath
+Set fso = CreateObject("Scripting.FileSystemObject")
+Set shell = CreateObject("WScript.Shell")
 
-'If you want to run this program, copy it to a directory outside VBS and try again.
+scriptDir = fso.GetParentFolderName(WScript.ScriptFullName)
 
-Execute(CreateObject("Scripting.FileSystemObject").OpenTextFile("VBS\__init__.vbs").ReadAll())
-thisPath = left(wscript.scriptfullname, len(wscript.scriptfullname) - len(wscript.scriptname))
-
-If True = False Then
-Dim directories, files, items_files
-directories = get_directories(thisPath + "VBS",0)
-files = get_files(thisPath + "VBS",0)
-item_files = get_items(thisPath + "VBS",0)
-
-Dim i ,str
-If IsEmpty(directories) = False Then
-    For i = 0 to UBound(directories)
-        str = str + directories(i) + vbCrLf
-    Next
-    WScript.Echo str
+If LCase(fso.GetFileName(scriptDir)) = "vbs" Then
+    vbsDir = scriptDir
+ElseIf fso.FolderExists(fso.BuildPath(scriptDir, "VBS")) Then
+    vbsDir = fso.BuildPath(scriptDir, "VBS")
+Else
+    WScript.Echo "ERROR: Could not locate VBS folder."
+    WScript.Echo "Run this script from the VBS folder or its parent folder."
+    WScript.Quit 1
 End If
 
-str = ""
-Dim file
-For Each file in files
-    str = str + file + vbCrLf
-Next
-WScript.Echo str
+parentDir = fso.GetParentFolderName(vbsDir)
+shell.CurrentDirectory = parentDir
 
-str = ""
-For i = 0 to UBound(item_files)
-    str = str + item_files(i) + vbCrLf
-Next
-WScript.Echo str
+initPath = fso.BuildPath(vbsDir, "__init__.vbs")
+Execute(fso.OpenTextFile(initPath).ReadAll())
 
+'------------------------------------------------------------------------
+' Character Code Detection Tests
+'------------------------------------------------------------------------
+WScript.Echo "========== Character Code Detection Tests =========="
+
+Dim samplesDir, utf8File, utf8BomFile, sjisFile, unicodeFile, asciiFile
+samplesDir = fso.BuildPath(vbsDir, "samples")
+
+utf8File = fso.BuildPath(samplesDir, "utf8.txt")
+utf8BomFile = fso.BuildPath(samplesDir, "utf8_bom.txt")
+sjisFile = fso.BuildPath(samplesDir, "shift_jis.txt")
+unicodeFile = fso.BuildPath(samplesDir, "unicode.txt")
+asciiFile = fso.BuildPath(samplesDir, "ascii.txt")
+
+WScript.Echo ""
+WScript.Echo "--- UTF-8 (no BOM) detection ---"
+If is_utf8(utf8File) Then
+    WScript.Echo "? PASS: " + utf8File + " detected as UTF-8"
+Else
+    WScript.Echo "? FAIL: " + utf8File + " not detected as UTF-8"
 End If
 
-Call directory_contents_move(thisPath + "VBS", "C:\VBS", -1, "YES")
-Call directory_contents_move("C:\VBS", thisPath + "VBS", -1, "YES")
+If is_utf8_nobom(utf8File) Then
+    WScript.Echo "? PASS: " + utf8File + " detected as UTF-8 (no BOM)"
+Else
+    WScript.Echo "? FAIL: " + utf8File + " not detected as UTF-8 (no BOM)"
+End If
+
+WScript.Echo ""
+WScript.Echo "--- UTF-8 (with BOM) detection ---"
+If is_utf8_bom(utf8BomFile) Then
+    WScript.Echo "? PASS: " + utf8BomFile + " detected as UTF-8 (with BOM)"
+Else
+    WScript.Echo "? FAIL: " + utf8BomFile + " not detected as UTF-8 (with BOM)"
+End If
+
+If is_utf8(utf8BomFile) Then
+    WScript.Echo "? PASS: " + utf8BomFile + " detected as UTF-8 (either)"
+Else
+    WScript.Echo "? FAIL: " + utf8BomFile + " not detected as UTF-8 (either)"
+End If
+
+WScript.Echo ""
+WScript.Echo "--- Shift_JIS detection ---"
+If is_sjis(sjisFile) Then
+    WScript.Echo "? PASS: " + sjisFile + " detected as Shift_JIS"
+Else
+    WScript.Echo "? FAIL: " + sjisFile + " not detected as Shift_JIS"
+End If
+
+WScript.Echo ""
+WScript.Echo "--- Unicode detection ---"
+If is_unicode(unicodeFile) Then
+    WScript.Echo "? PASS: " + unicodeFile + " detected as Unicode"
+Else
+    WScript.Echo "? FAIL: " + unicodeFile + " not detected as Unicode"
+End If
+
+WScript.Echo ""
+WScript.Echo "--- ASCII detection ---"
+If is_ascii(asciiFile) Then
+    WScript.Echo "? PASS: " + asciiFile + " detected as ASCII"
+Else
+    WScript.Echo "? FAIL: " + asciiFile + " not detected as ASCII"
+End If
+
+If Not is_ascii(utf8File) Then
+    WScript.Echo "? PASS: " + utf8File + " correctly rejected as ASCII"
+Else
+    WScript.Echo "? FAIL: " + utf8File + " incorrectly detected as ASCII"
+End If
+
+If Not is_ascii(utf8BomFile) Then
+    WScript.Echo "? PASS: " + utf8BomFile + " correctly rejected as ASCII"
+Else
+    WScript.Echo "? FAIL: " + utf8BomFile + " incorrectly detected as ASCII"
+End If
+
+If Not is_ascii(sjisFile) Then
+    WScript.Echo "? PASS: " + sjisFile + " correctly rejected as ASCII"
+Else
+    WScript.Echo "? FAIL: " + sjisFile + " incorrectly detected as ASCII"
+End If
+
+If Not is_ascii(unicodeFile) Then
+    WScript.Echo "? PASS: " + unicodeFile + " correctly rejected as ASCII"
+Else
+    WScript.Echo "? FAIL: " + unicodeFile + " incorrectly detected as ASCII"
+End If
+
+
+WScript.Echo ""
+WScript.Echo "========== Test Complete =========="

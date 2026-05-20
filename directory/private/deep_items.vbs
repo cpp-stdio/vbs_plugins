@@ -1,5 +1,4 @@
 Function deep_items(ByVal directoryName, ByRef deeper, ByRef element, ByRef fso)
-
     Dim items()
     Dim length: length = 0
     deep_items = items

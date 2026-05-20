@@ -1,19 +1,27 @@
 Function get_directories(ByVal directoryName, ByVal deeper)
-    'Get deep directories from it directory.
+    ' Returns the full paths of all directories found within the specified directory.
+    ' 指定したディレクトリ内のすべてのサブディレクトリのフルパスを配列で返す。
     '
-    'Parameters
-    '----------
-    'directoryName : String
-    '   it directory name
-    'deeper : int
-    '   [Negative number] It search all directory contents
-    '   [       0       ] It search a directory contents
-    '   [positive number] It searches directory contents deep hierarchy for the according to number
+    ' Parameters / パラメータ
+    ' ----------
+    ' directoryName : String
+    '   Path of the directory to search.
+    '   検索対象ディレクトリのパス。
+    ' deeper : Integer
+    '   Controls how many levels of subdirectories to search.
+    '   何階層まで検索するかを指定する。
+    '   [Negative number] : Searches all subdirectories recursively.
+    '                       すべてのサブディレクトリを再帰的に検索する。
+    '   [       0       ] : Searches only the specified directory (no subdirectories).
+    '                       指定ディレクトリ直下のみ検索する（サブディレクトリは含まない）。
+    '   [Positive number] : Searches subdirectories up to the specified depth.
+    '                       指定した階層数の深さまで検索する。
     '
-    'Return
-    '----------
-    'list
-    '   It full path directories
+    ' Return / 戻り値
+    ' ----------
+    ' Array
+    '   Array of full paths of found directories. Empty if none found.
+    '   見つかったディレクトリのフルパスの配列。見つからなかった場合は空。
 
     If Right(directoryName,1) = "\" Then
         directoryName = left(directoryName, len(directoryName) - 1)
@@ -27,14 +35,14 @@ Function get_directories(ByVal directoryName, ByVal deeper)
         directories = deep_items(directoryName, deeper,"FOLDER", objFso)
         
         If Err.Number <> 0 Then
-            WScript.Echo "Error " + Err.Description
+            WScript.Echo "Error: " + Err.Description
         ElseIf IsEmpty(directories) = True Then
-            WScript.Echo "searched, Not found deep directories"
+            WScript.Echo "No directories found."
         Else
             WScript.Echo "searched, " + Cstr(UBound(directories) + 1) + " directories found."
         End if
     Else
-        WScript.Echo "Not exist, " + directoryName
+        WScript.Echo "Directory not found: " + directoryName
     End If
 
     get_directories = directories

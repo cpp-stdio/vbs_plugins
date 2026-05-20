@@ -1,23 +1,17 @@
 Function is_sjis(fileName)
-    ' The character encoding for this file is SJIS(SHIFT-JIS)?
+    ' Shift_JIS かどうかを判定する
     '
-    'Parameters
-    '----------
-    'fileName : String
-    '   It is the file name whose character code us want to change
+    ' Parameters
+    ' ----------
+    ' fileName : String  判定対象ファイルのパス
     '
-    'Return
-    '----------
-    'boolen
-    '   Yes(True) , No(False)
-
-    WScript.Echo fileName
+    ' Return
+    ' ----------
+    ' Boolean  Shift_JISならTrue、それ以外はFalse
 
     If ADODB_stream_isCharcode(fileName, "Shift_JIS") Then
-        WScript.Echo "[SUCCESS] This text file character is Shift_JIS."
         is_sjis = True
     Else
-        WScript.Echo "[FAILURE] This text file character isn't Shift_JIS."
         is_sjis = False
     End If
 End Function

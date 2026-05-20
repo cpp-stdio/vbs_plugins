@@ -53,7 +53,7 @@ Function deep_move(ByVal before, ByVal after, ByRef deeper, ByRef overwrite, ByR
     remain = remain + fsoFolder.subfolders.Count
     
     If remain <= 0 Then
-        call fso.DeleteFolder(before, True)
+        Call fso.DeleteFolder(before, True)
     End If
 
     deep_move = remain

@@ -1,32 +1,35 @@
 Function delete_directory(ByVal directoryName)
-    'Delete all its files and folders, including directory
+    ' Deletes the specified directory along with all its contents (files and subdirectories).
+    ' 指定したディレクトリを、その中身（ファイル・サブディレクトリ）ごとすべて削除する。
     '
-    'Parameters
-    '----------
-    'directoryName : String
-    '   directory name to be delete
+    ' Parameters / パラメータ
+    ' ----------
+    ' directoryName : String
+    '   Path of the directory to delete.
+    '   削除するディレクトリのパス。
     '
-    'Return
-    '----------
-    'boolen
-    '   success(True) , failure(False)
+    ' Return / 戻り値
+    ' ----------
+    ' Boolean
+    '   True if successful, False if an error occurred.
+    '   成功した場合は True、エラーが発生した場合は False。
     delete_directory = False
 
     Dim objFso: Set objFso = CreateObject("Scripting.FileSystemObject")
     On Error Resume Next
     
-    'Delete directory(including read-only and subdirectory)
-    call objFso.DeleteFolder(directoryName, True)
+    'Delete the directory and all its contents (forced, including read-only files and subdirectories)
+    Call objFso.DeleteFolder(directoryName, True)
 
     If Err.Number <> 0 Then
-        'error message
+        'Determine and display the reason for failure
         If objFso.FolderExists(directoryName) = True Then
-            WScript.Echo "The directory being edited exists."
+            WScript.Echo "Cannot delete: the directory may be in use or locked."
         Else
-            WScript.Echo "Not exist, " + directoryName
+            WScript.Echo "Directory not found: " + directoryName
         End if
     Else
-        WScript.Echo "completed, Deletion of " + directoryName
+        WScript.Echo "Directory deleted: " + directoryName
         delete_directory = True
     End If
 
